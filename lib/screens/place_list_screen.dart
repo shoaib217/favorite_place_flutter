@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:place_app/main.dart';
+import 'package:provider/provider.dart';
+import '../providers/place_provider.dart';
 
 class PlaceListScreen extends StatelessWidget {
   const PlaceListScreen({super.key});
@@ -19,7 +21,47 @@ class PlaceListScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: const Center(child: CircularProgressIndicator()),
+      body: FutureBuilder(
+        future: Provider.of<PlaceProvider>(context,listen: false).fetchAndSetPlaces(),
+        builder: (ctx,snapshot) => snapshot.connectionState == ConnectionState.waiting ? Center(child: CircularProgressIndicator(),) : Consumer<PlaceProvider>(
+          builder: ((ctx, greatPlaces, ch) => greatPlaces.items.isEmpty
+              ? ch!
+              : ListView.builder(
+                  itemCount: greatPlaces.items.length,
+                  itemBuilder: (ctx, i) => ListTile(
+                    leading: CircleAvatar(
+                      backgroundImage: FileImage(greatPlaces.items[i].image),
+                    ),
+                    title: Text(greatPlaces.items[i].title),
+                    onTap: () {},
+                  ),
+                )),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: IconButton(
+                    alignment: Alignment.center,
+                    onPressed: () =>
+                        Navigator.of(context).pushNamed(MyApp.addPlace),
+                    icon: const Icon(
+                      Icons.add,
+                      size: 60,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20,),
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text('Got no places yet, start adding some!',textAlign: TextAlign.center,),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

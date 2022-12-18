@@ -11,7 +11,7 @@ final String address;
 class Place{
   final String id;
   final String title;
-  final PlaceLocation location;
+  final PlaceLocation? location;
   final File image;
 
   Place(this.id, this.title, this.location, this.image);
