@@ -8,7 +8,7 @@ class DBHelper {
         onCreate: (db, version) {
       return db.execute(
           'CREATE TABLE user_places(id TEXT PRIMARY KEY,title TEXT,image TEXT)');
-    }, version: 1);
+    }, version: 2);
   }
 
   static Future<void> insert(String table, Map<String, Object> data) async {

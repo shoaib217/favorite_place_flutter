@@ -28,6 +28,8 @@
 	<string>We Need To Take a Picture!</string>	
 	<key>NSCameraUsageDescription</key>
 	<string>We Need To Take a Picture!</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Access Location!</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
