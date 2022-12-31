@@ -36,27 +36,21 @@ class PlaceListScreen extends StatelessWidget {
                     onTap: () {},
                   ),
                 )),
-          child: Center(
+          child: Container(
+            alignment: Alignment.center,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: IconButton(
-                    alignment: Alignment.center,
-                    onPressed: () =>
-                        Navigator.of(context).pushNamed(MyApp.addPlace),
-                    icon: const Icon(
-                      Icons.add,
-                      size: 60,
-                    ),
+                IconButton(
+                  onPressed: () =>
+                      Navigator.of(context).pushNamed(MyApp.addPlace),
+                  icon: const Icon(
+                    Icons.add,
                   ),
+                  iconSize: 45,
                 ),
-                const SizedBox(height: 20,),
-                const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text('Got no places yet, start adding some!',textAlign: TextAlign.center,),
-                ),
+                const SizedBox(height: 10,),
+                const Text('Got no places yet, start adding some!',),
               ],
             ),
           ),

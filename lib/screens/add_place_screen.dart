@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:place_app/widgets/location_input.dart';
 import '../widgets/image_input.dart';
 import 'dart:io';
 import 'package:provider/provider.dart';
@@ -69,6 +70,8 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
                       height: 10,
                     ),
                     ImageInput(_selectImage),
+                    const SizedBox(height: 20,),
+                    LocationInput()
                   ],
                 ),
               ),
@@ -80,9 +83,12 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
               Icons.add,
               color: Colors.black,
             ),
-            label: const Text(
-              'ADD',
-              style: TextStyle(color: Colors.black),
+            label: const Padding(
+              padding: EdgeInsets.fromLTRB(0, 15, 0,15),
+              child: Text(
+                'ADD',
+                style: TextStyle(color: Colors.black),
+              ),
             ),
             style: const ButtonStyle(
               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
