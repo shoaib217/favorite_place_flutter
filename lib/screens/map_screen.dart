@@ -38,19 +38,20 @@ class _MapScreenState extends State<MapScreen> {
         title: const Text('Your Map'),
         actions: [
           if (widget.isSelecting)
-            IconButton(onPressed: () => _goBack(), icon: Icon(Icons.check))
+            IconButton(onPressed: _pickedLocation ==null ? null : () =>  Navigator.of(context).pop(_pickedLocation), icon: const Icon(Icons.check))
         ],
       ),
       body: GoogleMap(
+        buildingsEnabled: true,
         initialCameraPosition: CameraPosition(
-          zoom: 14,
+          zoom: 16,
           target: LatLng(widget.initialLocation.latitude,
               widget.initialLocation.longitude),
         ),
         onTap: widget.isSelecting ? _selectedLocation : null,
         markers: _pickedLocation == null
             ? {}
-            : {Marker(markerId: MarkerId('m1'), position: _pickedLocation!)},
+            : {Marker(markerId: const MarkerId('m1'), position: _pickedLocation!)},
       ),
     );
   }

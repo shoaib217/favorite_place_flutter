@@ -9,7 +9,9 @@ import 'package:place_app/models/place.dart';
 import 'package:place_app/screens/map_screen.dart';
 
 class LocationInput extends StatefulWidget {
-  const LocationInput({super.key});
+  final Function onSelectedLocation;
+
+  LocationInput(this.onSelectedLocation);
 
   @override
   State<LocationInput> createState() => _LocationInputState();
@@ -28,11 +30,16 @@ class _LocationInputState extends State<LocationInput> {
     setState(() {
       _previewImageUrl = staticImageUrl;
     });
+
+    widget.onSelectedLocation(
+      LatLng(locationData.latitude!, locationData.longitude!),
+    );
   }
 
   Future<void> _selectOnMap() async {
     final latLng = await Location().getLocation();
-    final selectedLocation = await Navigator.of(context).push(MaterialPageRoute(
+    final selectedLocation =
+        await Navigator.of(context).push<LatLng>(MaterialPageRoute(
       fullscreenDialog: true,
       builder: (ctx) => MapScreen(
         initialLocation: LatLng(
@@ -42,6 +49,14 @@ class _LocationInputState extends State<LocationInput> {
         isSelecting: true,
       ),
     ));
+
+    if (selectedLocation == null) {
+      return;
+    }
+    print('selectedLocation - $selectedLocation');
+    widget.onSelectedLocation(
+      LatLng(selectedLocation.latitude, selectedLocation.longitude),
+    );
   }
 
   @override
