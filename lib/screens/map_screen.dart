@@ -23,7 +23,13 @@ class _MapScreenState extends State<MapScreen> {
 
   void _goBack() {
     if (_pickedLocation == null) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: const Text('Please Picked Location'),action: SnackBarAction(label: 'Close',onPressed: () => ScaffoldMessenger.of(context).hideCurrentSnackBar(),),));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: const Text('Please Picked Location'),
+        action: SnackBarAction(
+          label: 'Close',
+          onPressed: () => ScaffoldMessenger.of(context).hideCurrentSnackBar(),
+        ),
+      ));
     } else {
       Navigator.of(context).pop(_pickedLocation);
     }
@@ -38,7 +44,11 @@ class _MapScreenState extends State<MapScreen> {
         title: const Text('Your Map'),
         actions: [
           if (widget.isSelecting)
-            IconButton(onPressed: _pickedLocation ==null ? null : () =>  Navigator.of(context).pop(_pickedLocation), icon: const Icon(Icons.check))
+            IconButton(
+                onPressed: _pickedLocation == null
+                    ? null
+                    : () => Navigator.of(context).pop(_pickedLocation),
+                icon: const Icon(Icons.check))
         ],
       ),
       body: GoogleMap(
@@ -49,9 +59,16 @@ class _MapScreenState extends State<MapScreen> {
               widget.initialLocation.longitude),
         ),
         onTap: widget.isSelecting ? _selectedLocation : null,
-        markers: _pickedLocation == null
+        markers: (_pickedLocation == null && widget.isSelecting)
             ? {}
-            : {Marker(markerId: const MarkerId('m1'), position: _pickedLocation!)},
+            : {
+                Marker(
+                  markerId: const MarkerId('m1'),
+                  position: _pickedLocation ??
+                      LatLng(widget.initialLocation.latitude,
+                          widget.initialLocation.longitude),
+                ),
+              },
       ),
     );
   }

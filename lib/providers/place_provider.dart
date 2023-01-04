@@ -34,4 +34,8 @@ final placeTable = 'user_places';
     _items =  dataList.map((item) => Place(item['id'], item['title'], PlaceLocation(item['address'], item['lat'], item['long']), File(item['image']))).toList();
     notifyListeners();
   }
+
+  Place findById(String id){
+    return _items.firstWhere((place) => place.id == id);
+  }
 }

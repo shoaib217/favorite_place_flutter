@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:place_app/screens/add_place_screen.dart';
+import 'package:place_app/screens/place_detail_screen.dart';
 import 'package:place_app/screens/place_list_screen.dart';
 import 'package:provider/provider.dart';
 import './providers/place_provider.dart';
@@ -12,6 +13,7 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   static const addPlace = '/add-place';
+  static const placeDetail = '/detail-place';
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +27,7 @@ class MyApp extends StatelessWidget {
         home: const PlaceListScreen(),
         routes: {
           addPlace: (ctx) => const AddPlaceScreen(),
+          placeDetail: (ctx) => const PlaceDetailScreen(),
         },
       ),
     );
