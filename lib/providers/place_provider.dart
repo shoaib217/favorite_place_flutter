@@ -35,6 +35,12 @@ final placeTable = 'user_places';
     notifyListeners();
   }
 
+  Future<void> deletePlace(String placeId)async{
+    await DBHelper.deletePlace(placeTable, placeId);
+    _items.removeWhere((element) => element.id == placeId);
+    notifyListeners();
+  }
+
   Place findById(String id){
     return _items.firstWhere((place) => place.id == id);
   }

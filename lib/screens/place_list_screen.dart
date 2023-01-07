@@ -6,7 +6,6 @@ import '../providers/place_provider.dart';
 
 class PlaceListScreen extends StatelessWidget {
   const PlaceListScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,6 +45,7 @@ class PlaceListScreen extends StatelessWidget {
                           onTap: () {
                             Navigator.of(context).pushNamed(MyApp.placeDetail ,arguments: greatPlaces.items[i].id);
                           },
+                          trailing: IconButton(onPressed: ()=> greatPlaces.deletePlace(greatPlaces.items[i].id), icon: Icon(Icons.delete,color: Colors.red,)),
                         ),
                       )),
                 child: Container(

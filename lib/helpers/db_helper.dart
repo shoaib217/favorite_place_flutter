@@ -23,4 +23,9 @@ static Future<List<Map<String,dynamic>>> getData(String table) async{
   
 }
 
+static Future<void> deletePlace(String table,String placeId) async{
+  final db = await DBHelper.getDatabase();
+  db.delete(table,where: 'id = ?',whereArgs: [placeId]);
+  
+}
 }
